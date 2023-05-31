@@ -2,6 +2,7 @@ import pandas as pd
 import sqlite3
 import os
 import unittest
+import pytest
 
 
 class OutputFileTest(unittest.TestCase):
