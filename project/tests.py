@@ -5,7 +5,6 @@ import unittest
 
 
 class OutputFileTest(unittest.TestCase):
-    
     def test_output_file_creation(self):
         file_path = "../data/verkehrszaelungen.sqlite"
         self.assertTrue(os.path.exists(file_path), f"Output file '{file_path}' does not exist.")
