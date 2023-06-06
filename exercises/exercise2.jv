@@ -29,6 +29,7 @@ pipeline TrainstopsPipeline {
   block DataExtractor oftype HttpExtractor { url: "https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV" ;}
   block TrainsTextFileInterpreter oftype TextFileInterpreter {}
   block TrainsCSVInterpreter oftype CSVInterpreter { delimiter: ';'; }
+  block MpgColumnDeleter oftype ColumnDeleter {delete: [column J];}
   block TrainsTableInterpreter oftype TableInterpreter {
       header: true;
       columns: [
@@ -40,8 +41,7 @@ pipeline TrainstopsPipeline {
         "Laenge" oftype Laenge_Breite,
         "Breite" oftype Laenge_Breite,
         "Betreiber_Name" oftype text,
-        "Betreiber_Nr" oftype integer,
-        "Status" oftype text
+        "Betreiber_Nr" oftype integer
 ];
 }
   block DatabaseLoader oftype SQLiteLoader { table: "Trainstops"; file: "trainstops.sqlite"; }
@@ -50,7 +50,7 @@ pipeline TrainstopsPipeline {
   DataExtractor
     ->TrainsTextFileInterpreter
     ->TrainsCSVInterpreter
+    ->MpgColumnDeleter
     ->TrainsTableInterpreter
     ->DatabaseLoader;
-
 }
