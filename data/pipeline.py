@@ -14,7 +14,6 @@ df2_xslx = df2_xslx.set_index("Zeit")
 df1_xslx = df1_xslx.drop('Unnamed: 0', axis=1)
 df2_xslx = df2_xslx.drop('Unnamed: 0', axis=1)
 
-print(df1_xslx)
 conn = sqlite3.connect("../data/verkehrszaehlungen.sqlite")
 
 df1_xslx.to_sql("fahraddverkehr_2018", conn, if_exists="replace")
