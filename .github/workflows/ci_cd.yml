@@ -30,8 +30,3 @@ jobs:
         run: |
           set -e  # Exit immediately if a command returns a non-zero status code
           ./tests.sh
-          exit_status=$?
-          if [ $exit_status -ne 0 ]; then
-            echo "Some tests failed"
-            exit $exit_status
-          fi
