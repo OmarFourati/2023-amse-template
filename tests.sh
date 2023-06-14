@@ -1,5 +1,9 @@
 echo ~~~~ Runing Pipeline ~~~~
-python data/pipeline.py
+cd data
+python pipeline.py
+cd ..
 echo  ~~~~ Executing automated tests for the project. ~~~~ 
-python project/tests.py
+cd project
+python tests.py
+cd ..
 echo ~~~~ Testing done. ~~~~
