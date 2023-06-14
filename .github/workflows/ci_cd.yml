@@ -26,6 +26,10 @@ jobs:
       - name: Set execute permissions for tests.sh
         run: chmod +x tests.sh
 
+      - name: Display Current Directory
+        run: |
+          pwd
+          
       - name: Run Tests
         run: |
           set -e  # Exit immediately if a command returns a non-zero status code
