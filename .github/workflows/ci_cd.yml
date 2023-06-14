@@ -25,4 +25,6 @@ jobs:
         run: chmod +x tests.sh
 
       - name: Run Tests
-        run: ./tests.sh
+        run: |
+          set -e  # Exit immediately if a command returns a non-zero status code
+          ./tests.sh
