@@ -2,7 +2,7 @@ name: Run Tests
 
 on:
   push:
-    branches-ignore:
+    branches:
       - '*'
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Set execute permissions for test.sh
+      - name: Set execute permissions for tests.sh
         run: chmod +x tests.sh
 
       - name: Run Tests
