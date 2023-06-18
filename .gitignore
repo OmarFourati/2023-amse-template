@@ -1,4 +1,4 @@
 *.csv
 *.sqlite
 
-!exercises/cars.sqlite
+!cars.sqlite

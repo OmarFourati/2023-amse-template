@@ -9,5 +9,5 @@ column_names = df.columns.tolist()
 print(column_names)
 
 df.set_axis(new_column_names, axis=1, inplace=True)
-df.to_sql("cars", "sqlite:///exercises/cars.sqlite", if_exists="replace", index=False)
+df.to_sql("cars", "sqlite:///cars.sqlite", if_exists="replace", index=False)
 
