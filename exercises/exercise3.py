@@ -31,16 +31,16 @@ df = df.astype(data_types)
 
 # CIN validation
 is_valid_cin = df['CIN'].apply(lambda x: bool(re.match(r'^0?\d{5}$', str(x))))
+df = df[df['electro'] > 0]
+df = df[df["hybrid"] > 0]
+df = df[df['gas'] > 0]
+df = df[df['petrol'] > 0]
+df = df[df['plugInHybrid'] > 0]
+df = df[df['others'] > 0]
 
 df = df.dropna()
 print(df.head())
 #validation for values > 0
-# df = df[df['petrol'].apply(lambda x: isinstance(x, int) and x > 0 if isinstance(x, int) else False)]
-# df = df[df['gas'].apply(lambda x: isinstance(x, int) and x > 0 if isinstance(x, int) else False)]
-# df = df[df['electro'].apply(lambda x: isinstance(x, int) and x > 0 if isinstance(x, int) else False)]
-# df = df[df['hybrid'].apply(lambda x: isinstance(x, int) and x > 0 if isinstance(x, int) else False)]
-# df = df[df['plugInHybrid'].apply(lambda x: isinstance(x, int) and x > 0 if isinstance(x, int) else False)]
-# df = df[df['others'].apply(lambda x: isinstance(x, int) and x > 0 if isinstance(x, int) else False)]
 
 
 df.to_sql("cars", "sqlite:///cars.sqlite", if_exists="replace", index=False)
