@@ -18,6 +18,7 @@ data_types = {
 df.set_axis(new_column_names, axis=1, inplace=True)
 
 df['petrol'] = pd.to_numeric(df['petrol'], errors='coerce', downcast='integer')
+df['diesel'] = pd.to_numeric(df['petrol'], errors='coerce', downcast='integer')
 df['gas'] = pd.to_numeric(df['gas'], errors='coerce', downcast='integer')
 df['electro'] = pd.to_numeric(df['electro'], errors='coerce', downcast='integer')
 df['hybrid'] = pd.to_numeric(df['hybrid'], errors='coerce', downcast='integer')
@@ -37,6 +38,7 @@ df = df[df['gas'] > 0]
 df = df[df['petrol'] > 0]
 df = df[df['plugInHybrid'] > 0]
 df = df[df['others'] > 0]
+df = df[df['diesel'] > 0]
 
 df = df.dropna()
 print(df.head())
