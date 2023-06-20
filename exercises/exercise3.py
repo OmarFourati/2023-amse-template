@@ -24,7 +24,7 @@ print(df["name"])
 
 # CIN validation
 #validation for values > 0
-is_valid_cin = df['CIN'].apply(lambda x: bool(re.match(r'^0?\d{5}$', str(x))))
+df['CIN'] = df['CIN'].astype(str).str[:5].str.pad(width=5, side='right', fillchar='0')
 df = df[df['electro'] > 0]
 df = df[df["hybrid"] > 0]
 df = df[df['gas'] > 0]
