@@ -22,8 +22,9 @@ df['others'] = pd.to_numeric(df['others'], errors='coerce', downcast='integer')
 #Data Type assignement
 print(df["name"])
 
-# CIN validation and postiv numbers
-df = df[df['CIN'].astype(str).str.match(r'^\d{5}$')]  # CIN validation
+# CIN validation
+#validation for values > 0
+is_valid_cin = df['CIN'].apply(lambda x: bool(re.match(r'^0?\d{5}$', str(x))))
 df = df[df['electro'] > 0]
 df = df[df["hybrid"] > 0]
 df = df[df['gas'] > 0]
