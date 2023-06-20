@@ -1,56 +1,49 @@
 import pandas as pd
-import re
+
+from sqlalchemy import create_engine
 
 
-columns_for_sql = [0, 1, 2, 12, 22, 32, 42, 52, 62, 72]
+
+
+# Define the source file URL and target database
+
+data_url = 'https://www-genesis.destatis.de/genesis/downloads/00/tables/46251-0021_00.csv'
+
+database_name = 'cars.sqlite'
+
+
+
+
+# Read the CSV file into a DataFrame, skipping the metadata lines
 new_column_names = ["date", "CIN", "name", "petrol", "diesel", "gas", "electro", "hybrid", "plugInHybrid", "others"]
-df = pd.read_csv("https://www-genesis.destatis.de/genesis/downloads/00/tables/46251-0021_00.csv", sep=";", encoding="utf-8", encoding_errors="replace",skiprows=6, skipfooter=4, usecols=columns_for_sql)
+columns_for_sql = [0, 1, 2, 12, 22, 32, 42, 52, 62, 72]
 
 
-#new columns assignement
+df = pd.read_csv(data_url, skiprows=6, skipfooter=4, encoding='latin1', delimiter= ";", usecols=columns_for_sql)
+
+
 df.set_axis(new_column_names, axis=1, inplace=True)
-df['petrol'] = pd.to_numeric(df['petrol'], errors='coerce', downcast='integer')
-df['diesel'] = pd.to_numeric(df['petrol'], errors='coerce', downcast='integer')
-df['gas'] = pd.to_numeric(df['gas'], errors='coerce', downcast='integer')
-df['electro'] = pd.to_numeric(df['electro'], errors='coerce', downcast='integer')
-df['hybrid'] = pd.to_numeric(df['hybrid'], errors='coerce', downcast='integer')
-df['plugInHybrid'] = pd.to_numeric(df['plugInHybrid'], errors='coerce', downcast='integer')
-df['others'] = pd.to_numeric(df['others'], errors='coerce', downcast='integer')
 
+# # Select and rename the desired columns
 
+# df = df[['A', 'B', 'C', 'M', 'W', 'AG', 'AQ', 'BA', 'BK', 'BU']]
 
-#Data Type assignement
-print(df["name"])
-
-# CIN validation
-#validation for values > 0
-is_valid_cin = df['CIN'].apply(lambda x: bool(re.match(r'^0?\d{5}$', str(x))))
-df = df[df['electro'] > 0]
-df = df[df["hybrid"] > 0]
-df = df[df['gas'] > 0]
-df = df[df['petrol'] > 0]
-df = df[df['plugInHybrid'] > 0]
-df = df[df['others'] > 0]
-df = df[df['diesel'] > 0]
-
-df = df.dropna()
-
-data_types = {
-    "date" : str,
-    "CIN" : str,
-    "name" : str,
-    "diesel": int,
-    "electro": int,
-    "gas": int,
-    "hybrid": int,
-    "plugInHybrid": int,
-    "others": int,
-    "petrol": int
-}    
-df = df.astype(data_types)
+# # df.columns = ['date', 'CIN', 'name', 'petrol', 'diesel', 'gas', 'electro', 'hybrid', 'plugInHybrid', 'others']
 
 
 
 
-df.to_sql("cars", "sqlite:///cars.sqlite", if_exists="replace", index=False)
+# Validate and clean the data
 
+df = df[df['CIN'].astype(str).str.match(r'^\d{5}$')]  # CIN validation
+
+df = df[df[['petrol', 'diesel', 'gas', 'electro', 'hybrid', 'plugInHybrid', 'others']].apply(pd.to_numeric, errors='coerce').gt(0).all(axis=1)]  # Positive integer validation
+
+
+
+
+# Create a SQLite database engine and write the DataFrame to a table
+
+engine = create_engine(f'sqlite:///{database_name}')
+
+df.to_sql('cars', engine, if_exists='replace', index=False)
