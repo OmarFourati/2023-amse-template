@@ -3,12 +3,12 @@
 ## Summary
 
 <!-- Describe your data science project in max. 5 sentences. -->
-This project analyzes the frequency of cyclists in the Weselstraße in Münster in 2018 and 2022. The main objective would be to perform an analytical comparision between these two years to conclude about the evolution of this frequency.
+This project analyzes the frequency of cyclists in the Weselstraße in Münster in 2018 and 2022. The main objective would be to perform an analytical comparision between these two years to conclude about the evolution of this frequency. Other factors proposed in the dataset can be analyzed and possible correlation can also be presented.
 
 ## Rationale
 
 <!-- Outline the impact of the analysis, e.g. which pains it solves. -->
-This analysis could help the cities of münster to analyze in more detail certain neighborhoods and streets in which the number of cyclists is low or became lower. The objective would be to, for example, review the infrastructure for cyclists in these areas and possibly propose changes that could encourage the inhabitants of these streets to use their bicycles more often.
+This analysis could help the cities of münster to analyze in more detail certain neighborhoods and streets in which the number of cyclists is low or became lower.In fact, with the environmental challenges that we face every day, the number of cyclists should in theory increase over the years. The objective would be to, for example, review the infrastructure for cyclists in these areas and possibly propose changes that could encourage the inhabitants of these streets to use their bicycles more often.
 
 ## Datasources
 
