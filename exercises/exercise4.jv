@@ -11,14 +11,14 @@ pipeline BatterieTemperatur {
     block BatterieTempTextFileInterpreter oftype TextFileInterpreter {}
     block BatterieTempInterpreter oftype CSVInterpreter { delimiter: ';'; }
     block TemperatureTableInterpreter oftype TableInterpreter {
-      header: true;
+      header: false;
       columns: [
         "Geraet" oftype integer,
         "Hersteller" oftype text,
         "Model" oftype text,
         "Monat" oftype integer,
-        "Temperatur in °C (DWD)" oftype decimal,
-        "Batterietemperatur in °C" oftype decimal,
+        "Temperatur" oftype decimal,
+        "Batterietemperatur" oftype decimal,
         "Geraet aktiv" oftype text        
 ];
     }

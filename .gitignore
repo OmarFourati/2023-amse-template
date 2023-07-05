@@ -2,3 +2,4 @@
 *.sqlite
 
 !cars.sqlite
+!temperatures.sqlite
