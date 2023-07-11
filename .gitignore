@@ -1,5 +1,9 @@
 *.csv
 *.sqlite
+exercise5.zip
+GTFS.zip
+stops.txt
 
 !cars.sqlite
 !temperatures.sqlite
+!gtfs.sqlite
